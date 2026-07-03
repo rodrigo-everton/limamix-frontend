@@ -1,0 +1,82 @@
+"use client";
+
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+
+const navItems = [
+  { label: "Inicio", href: "/" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Quem Somos", href: "#quem-somos" },
+  { label: "Nossos Trabalhos", href: "#nossos-trabalhos" },
+  { label: "Vantagens", href: "#vantagens" },
+  { label: "Contato", href: "#contato" },
+];
+
+export function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-50 border-b border-black-secondary/10 bg-white/95 backdrop-blur">
+      <nav className="relative mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="text-xl font-bold text-black">
+          LimaMix
+        </Link>
+
+        <div className="hidden items-center gap-8 md:flex">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-sm font-semibold text-black-secondary transition-colors hover:text-orange"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        <a
+          href="#whatsapp"
+          className="hidden h-10 items-center justify-center rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover md:inline-flex"
+        >
+          WhatsApp
+        </a>
+
+        <button
+          type="button"
+          className="inline-flex size-10 items-center justify-center rounded-md border border-black-secondary/10 text-black transition-colors hover:border-orange hover:text-orange md:hidden"
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+
+        {isMenuOpen && (
+          <div className="absolute right-4 top-full mt-3 w-64 rounded-md border border-black-secondary/10 bg-white p-3 shadow-lg md:hidden">
+            <div className="flex flex-col items-end gap-1">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="w-full rounded-md px-3 py-2 text-right text-sm font-semibold text-black-secondary transition-colors hover:bg-white-secondary hover:text-orange"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+
+              <a
+                href="#whatsapp"
+                className="mt-2 inline-flex h-10 w-full items-center justify-center rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        )}
+      </nav>
+    </header>
+  );
+}
