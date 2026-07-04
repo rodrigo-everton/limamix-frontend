@@ -37,13 +37,12 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "h-12 px-6 text-base",
 };
 
-export function Button({
+function getButtonClasses({
   className,
   variant = "primary",
   size = "md",
-  ...props
-}: ButtonProps) {
-  const classes = [
+}: ButtonBaseProps & { className?: string }) {
+  return [
     baseClasses,
     variantClasses[variant],
     sizeClasses[size],
@@ -51,16 +50,24 @@ export function Button({
   ]
     .filter(Boolean)
     .join(" ");
+}
 
-  if ("href" in props) {
-    return <a className={classes} {...props} />;
+export function Button(props: ButtonProps) {
+  if (typeof props.href === "string") {
+    const { className, variant, size, ...linkProps } = props;
+    const classes = getButtonClasses({ className, variant, size });
+
+    return <a className={classes} {...linkProps} />;
   }
+
+  const { className, variant, size, type = "button", ...buttonProps } = props;
+  const classes = getButtonClasses({ className, variant, size });
 
   return (
     <button
-      type={props.type ?? "button"}
+      type={type}
       className={classes}
-      {...props}
+      {...buttonProps}
     />
   );
 }
