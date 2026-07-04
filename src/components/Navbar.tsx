@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -19,8 +20,15 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-black-secondary/10 bg-white/95 backdrop-blur">
       <nav className="relative mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-xl font-bold text-black">
-          LimaMix
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.jpg"
+            alt="LimaMix"
+            width={120}
+            height={40}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
@@ -37,8 +45,15 @@ export function Navbar() {
 
         <a
           href="#whatsapp"
-          className="hidden h-10 items-center justify-center rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover md:inline-flex"
+          className="hidden h-10 items-center justify-center gap-2 rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover md:inline-flex"
         >
+          <Image
+            src="/whatsapp-logo.svg"
+            alt="WhatsApp Logo"
+            width={18}
+            height={18}
+            className="size-5 object-contain"
+          />
           WhatsApp
         </a>
 
@@ -68,9 +83,16 @@ export function Navbar() {
 
               <a
                 href="#whatsapp"
-                className="mt-2 inline-flex h-10 w-full items-center justify-center rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover"
+                className="mt-2 inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover"
                 onClick={() => setIsMenuOpen(false)}
               >
+                <Image
+                  src="/whatsapp-logo.svg"
+                  alt="WhatsApp Logo"
+                  width={18}
+                  height={18}
+                  className="size-5 object-contain"
+                />
                 WhatsApp
               </a>
             </div>
