@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/Button";
 
 const footerLinks = [
   { label: "Serviços", href: "#servicos" },
@@ -50,9 +51,9 @@ export function Footer() {
             <div>
               <h2 className="text-sm font-semibold text-black">Atendimento</h2>
               <div className="mt-4 flex flex-col gap-3">
-                <a
+                <Button
                   href="#whatsapp"
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover"
+                  className="gap-2"
                 >
                   <Image
                     src="/whatsapp-logo.svg"
@@ -62,7 +63,7 @@ export function Footer() {
                     className="size-5 object-contain"
                   />
                   WhatsApp
-                </a>
+                </Button>
 
                 {/* <a */}
                   {/* href="#contato" */}

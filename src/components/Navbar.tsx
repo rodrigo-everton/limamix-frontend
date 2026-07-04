@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/Button";
 
 const navItems = [
   { label: "Inicio", href: "/" },
@@ -43,9 +44,9 @@ export function Navbar() {
           ))}
         </div>
 
-        <a
+        <Button
           href="#whatsapp"
-          className="hidden h-10 items-center justify-center gap-2 rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover md:inline-flex"
+          className="hidden gap-2 md:inline-flex"
         >
           <Image
             src="/whatsapp-logo.svg"
@@ -55,7 +56,7 @@ export function Navbar() {
             className="size-5 object-contain"
           />
           WhatsApp
-        </a>
+        </Button>
 
         <button
           type="button"
@@ -81,9 +82,9 @@ export function Navbar() {
                 </a>
               ))}
 
-              <a
+              <Button
                 href="#whatsapp"
-                className="mt-2 inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-orange px-4 text-sm font-semibold text-white transition-colors hover:bg-orange-hover"
+                className="mt-2 w-full gap-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Image
@@ -94,7 +95,7 @@ export function Navbar() {
                   className="size-5 object-contain"
                 />
                 WhatsApp
-              </a>
+              </Button>
             </div>
           </div>
         )}

@@ -1,11 +1,11 @@
 import { Navbar } from "@/components/Navbar";
-import { div } from "framer-motion/client";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
-  return <div>
-    <Navbar />
-    
-    <Footer />
-  </div> ;
+  return (
+    <div>
+      <Navbar />
+      <Footer />
+    </div>
+  );
 }

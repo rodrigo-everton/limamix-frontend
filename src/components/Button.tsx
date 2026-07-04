@@ -1,12 +1,24 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonBaseProps = {
   variant?: ButtonVariant;
   size?: ButtonSize;
 };
+
+type ButtonAsButtonProps = ButtonBaseProps &
+  ButtonHTMLAttributes<HTMLButtonElement> & {
+    href?: never;
+  };
+
+type ButtonAsLinkProps = ButtonBaseProps &
+  AnchorHTMLAttributes<HTMLAnchorElement> & {
+    href: string;
+  };
+
+type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
 
 const baseClasses =
   "inline-flex items-center justify-center rounded-md font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50";
@@ -29,20 +41,25 @@ export function Button({
   className,
   variant = "primary",
   size = "md",
-  type = "button",
   ...props
 }: ButtonProps) {
+  const classes = [
+    baseClasses,
+    variantClasses[variant],
+    sizeClasses[size],
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  if ("href" in props) {
+    return <a className={classes} {...props} />;
+  }
+
   return (
     <button
-      type={type}
-      className={[
-        baseClasses,
-        variantClasses[variant],
-        sizeClasses[size],
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      type={props.type ?? "button"}
+      className={classes}
       {...props}
     />
   );
