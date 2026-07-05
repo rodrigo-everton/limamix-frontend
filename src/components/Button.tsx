@@ -21,7 +21,17 @@ type ButtonAsLinkProps = ButtonBaseProps &
 type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
 
 const baseClasses =
-  "inline-flex items-center justify-center rounded-md font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50";
+  "items-center justify-center rounded-md font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50";
+
+const displayClasses = new Set([
+  "hidden",
+  "block",
+  "inline-block",
+  "flex",
+  "inline-flex",
+  "grid",
+  "inline-grid",
+]);
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-orange text-white hover:bg-orange-hover",
@@ -37,12 +47,21 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "h-12 px-6 text-base",
 };
 
+function hasDisplayClass(className?: string) {
+  return className
+    ?.split(/\s+/)
+    .some((classToken) =>
+      displayClasses.has(classToken.split(":").at(-1) ?? ""),
+    );
+}
+
 function getButtonClasses({
   className,
   variant = "primary",
   size = "md",
 }: ButtonBaseProps & { className?: string }) {
   return [
+    hasDisplayClass(className) ? undefined : "inline-flex",
     baseClasses,
     variantClasses[variant],
     sizeClasses[size],
