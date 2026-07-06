@@ -35,7 +35,7 @@ const displayClasses = new Set([
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-orange text-white hover:bg-orange-hover",
-  secondary: "bg-black text-white hover:bg-black-secondary",
+  secondary: "bg-black text-white hover:bg-black-secondary/97",
   outline:
     "border border-black-secondary/15 bg-white text-black hover:border-orange hover:text-orange",
   ghost: "bg-transparent text-black hover:bg-white-secondary hover:text-orange",
