@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Button } from "@/components/Button";
 
 const navItems = [
-  { label: "Inicio", href: "/" },
+  { label: "Inicio", href: "#" },
   { label: "Serviços", href: "#servicos" },
   { label: "Quem Somos", href: "#quem-somos" },
   { label: "Nossos Trabalhos", href: "#nossos-trabalhos" },
